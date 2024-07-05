@@ -16,5 +16,5 @@ export default defineConfig({
       promiseImportName: (i) => `__tla_${i}`,
     }),
   ],
-  base: `${ASSET_URL}/assets/`,
+  base: `/koan-web-repl/`,
 });
