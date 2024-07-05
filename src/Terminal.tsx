@@ -59,7 +59,9 @@ export function Terminal() {
 
             console.log(out.stdout());
             term.writeln(" " + out.result());
-            term.writeln(" " + out.stdout().slice(0, -1));
+            if (out.stdout()) {
+              term.writeln(" " + out.stdout().slice(0, -1));
+            }
 
             term.write(" λ ");
           } catch (err) {
