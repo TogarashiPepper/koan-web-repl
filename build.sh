@@ -1,4 +1,7 @@
 set -e -x
+cd koan-wasm-wrapper
+cargo update koan
+cd ..
 npm run build
 git switch gh-pages
 rm -rf assets index.html vite.svg
