@@ -1,0 +1,3 @@
+[submodule "koan-wasm-wrapper"]
+	path = koan-wasm-wrapper
+	url = https://github.com/TogarashiPepper/koan-wasm-wrapper

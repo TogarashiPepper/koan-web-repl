@@ -1,14 +1,14 @@
-import './App.css'
-import { Terminal } from './Terminal'
+import "./App.css";
+import { Terminal } from "./Terminal";
 
 function App() {
   // const [count, setCount] = createSignal(0)
 
   return (
     <>
-        <Terminal />
+      <Terminal />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
