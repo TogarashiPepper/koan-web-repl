@@ -57,10 +57,9 @@ export function Terminal() {
             const out = wasm.run_line(buffer, state);
             buffer = "";
 
+            console.log(out.stdout());
             term.writeln(" " + out.result());
-            if (out.stdout().slice(0, -1) === "") {
-              term.writeln(" " + out.stdout().slice(0, -1));
-            }
+            term.writeln(" " + out.stdout().slice(0, -1));
 
             term.write(" λ ");
           } catch (err) {

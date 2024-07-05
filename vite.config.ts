@@ -3,8 +3,6 @@ import solid from "vite-plugin-solid";
 import wasm from "vite-plugin-wasm";
 import topLevelAwait from "vite-plugin-top-level-await";
 
-const ASSET_URL = process.env.ASSET_URL || '';
-
 export default defineConfig({
   plugins: [
     wasm(),
