@@ -36,13 +36,13 @@ export function Terminal() {
   let buffer = "";
 
   onMount(() => {
-    console.log(wasm);
-
     const term = new XTerm({
       fontFamily: '"Cascadia Code", Menlo, monospace',
       theme: baseTheme,
       cursorBlink: true,
     });
+
+    let state = new wasm.WState();
 
     term.open(ref);
 
@@ -52,7 +52,16 @@ export function Terminal() {
           term.write("^C");
           break;
         case "\r":
-          // TODO: wasm support
+          term.writeln("");
+          const out = wasm.run_line(buffer, state);
+          buffer = "";
+
+          term.writeln(" " + out.result());
+          if (out.stdout().slice(0, -1) === "") {
+              term.writeln(" " + out.stdout().slice(0,-1));
+          }
+          
+          term.write(" λ ");
           break;
         case "\u007F":
           if (buffer.length >= 1) {
@@ -73,7 +82,7 @@ export function Terminal() {
     });
 
     term.writeln(
-      `\n Welcome to the ${blue}Koan${reset} repl, type \`help\` to get started!`,
+      `\n Welcome to the ${blue}Koan${reset} repl!`,
     );
     term.write(" λ ");
   });
