@@ -1,6 +1,6 @@
 import { ComponentProps, onMount } from "solid-js";
 import { Terminal as XTerm } from "@xterm/xterm";
-import * as wasm from "../koan-wasm-wrapper/pkg/koan_wasm_wrapper"
+import * as wasm from "../koan-wasm-wrapper/pkg/koan_wasm_wrapper";
 import "@xterm/xterm/css/xterm.css";
 
 // Custom theme to match style of xterm.js logo
@@ -52,16 +52,22 @@ export function Terminal() {
           term.write("^C");
           break;
         case "\r":
-          term.writeln("");
-          const out = wasm.run_line(buffer, state);
-          buffer = "";
+          try {
+            term.writeln("");
+            const out = wasm.run_line(buffer, state);
+            buffer = "";
 
-          term.writeln(" " + out.result());
-          if (out.stdout().slice(0, -1) === "") {
-              term.writeln(" " + out.stdout().slice(0,-1));
+            term.writeln(" " + out.result());
+            if (out.stdout().slice(0, -1) === "") {
+              term.writeln(" " + out.stdout().slice(0, -1));
+            }
+
+            term.write(" λ ");
+          } catch (err) {
+            buffer = "";
+            term.writeln("Error: " + err);
+            term.write(" λ ");
           }
-          
-          term.write(" λ ");
           break;
         case "\u007F":
           if (buffer.length >= 1) {
@@ -81,9 +87,7 @@ export function Terminal() {
       }
     });
 
-    term.writeln(
-      `\n Welcome to the ${blue}Koan${reset} repl!`,
-    );
+    term.writeln(`\n Welcome to the ${blue}Koan${reset} repl!`);
     term.write(" λ ");
   });
 
