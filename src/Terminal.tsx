@@ -54,13 +54,15 @@ export function Terminal() {
         case "\r":
           try {
             term.writeln("");
-            const out = wasm.run_line(buffer, state);
-            buffer = "";
 
-            console.log(out.stdout());
-            term.writeln(" " + out.result());
-            if (out.stdout()) {
-              term.writeln(" " + out.stdout().slice(0, -1));
+            if (buffer) {
+              const out = wasm.run_line(buffer, state);
+              buffer = "";
+
+              term.writeln(" " + out.result());
+              if (out.stdout()) {
+                term.writeln(" " + out.stdout().slice(0, -1));
+              }
             }
 
             term.write(" λ ");
