@@ -11,7 +11,7 @@ Syntax highlighting coming soon™
 
 ## Calculating n-th fibonacci
 ### Calculating `fib(10)`
-This is a fun way to calcluate fibonacci numbers although due to floating point inaccuracy we end up with some noise
+This is a fun way to calcluate fibonacci numbers although due to floating point inaccuracy we end up with noise
 ![image](https://github.com/TogarashiPepper/koan-web-repl/assets/83902606/ca3bc3fa-c2b2-4e7c-886b-73fd5a3f09fb)
 
 ### Calculating `fib(25)`
