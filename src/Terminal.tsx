@@ -84,8 +84,11 @@ export function Terminal() {
 						if (buffer) {
 							const out = wasm.run_line(buffer, state);
 							buffer = "";
+                            
+                            if (out.result() !== "nothing") {
+                                term.writeln(` ${out.result()}`);
+                            }
 
-							term.writeln(` ${out.result()}`);
 							if (out.stdout()) {
 								term.writeln(
 									` ${out.stdout().slice(0, -1)}`,
