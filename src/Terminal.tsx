@@ -2,6 +2,9 @@ import { ComponentProps, onMount } from "solid-js";
 import { Terminal as XTerm } from "@xterm/xterm";
 import * as wasm from "../koan-wasm-wrapper/pkg/koan_wasm_wrapper";
 import "@xterm/xterm/css/xterm.css";
+import hljs from 'highlight.js';
+import { LanguageFn } from 'highlight.js';
+import { createEmphasize } from "emphasize";
 
 // Custom theme to match style of xterm.js logo
 const baseTheme = {
@@ -28,6 +31,27 @@ const baseTheme = {
 
 const blue = "\x1b[34m";
 const reset = "\x1b[0m";
+const emphasize = createEmphasize({
+    'koan': (_x) => ({
+      case_insensitive: false,
+      keywords: ["let"],
+      contains: [
+          {
+              scope: 'string',
+              begin: '"',
+              end: '"',
+          },
+          {
+              scope: 'number',
+              match: /\d+(.\d+)?/,
+          },
+          {
+              scope: 'variable',
+              match: /[a-zA-Z_][a-zA-Z0-9_]*/,
+          }
+      ]
+    })
+})
 
 export interface TerminalProps extends ComponentProps<"div"> {}
 
@@ -36,6 +60,27 @@ export function Terminal() {
   let buffer = "";
 
   onMount(() => {
+    hljs.registerLanguage('koan', () => ({
+      case_insensitive: false,
+      keywords: ["let"],
+      contains: [
+          {
+              scope: 'string',
+              begin: '"',
+              end: '"',
+          },
+          {
+              scope: 'number',
+              match: /\d+(.\d+)?/,
+          },
+          {
+              scope: 'variable',
+              match: /[a-zA-Z_][a-zA-Z0-9_]*/,
+          }
+      ]
+    }));
+
+
     const term = new XTerm({
       fontFamily: '"Cascadia Code", Menlo, monospace',
       theme: baseTheme,
@@ -85,7 +130,8 @@ export function Terminal() {
             e >= "\u00a0"
           ) {
             buffer += e;
-            term.write(e);
+            term.write('\x1b[2K\r');
+            term.write(" λ " + emphasize.highlight('koan', buffer).value);
           }
       }
     });

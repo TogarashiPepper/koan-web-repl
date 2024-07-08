@@ -12,6 +12,8 @@
   "dependencies": {
     "@types/node": "^20.14.9",
     "@xterm/xterm": "^5.5.0",
+    "emphasize": "^7.0.0",
+    "highlight.js": "^11.10.0",
     "solid-js": "^1.8.17"
   },
   "devDependencies": {
