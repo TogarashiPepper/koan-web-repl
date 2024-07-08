@@ -3,7 +3,6 @@ import { Terminal as XTerm } from "@xterm/xterm";
 import * as wasm from "../koan-wasm-wrapper/pkg/koan_wasm_wrapper";
 import "@xterm/xterm/css/xterm.css";
 import hljs from 'highlight.js';
-import { LanguageFn } from 'highlight.js';
 import { createEmphasize } from "emphasize";
 
 // Custom theme to match style of xterm.js logo
