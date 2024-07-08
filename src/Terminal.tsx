@@ -49,7 +49,7 @@ const emphasize = createEmphasize({
 			},
 			{
 				scope: "variable",
-				match: /[a-zA-Z_][a-zA-Z0-9_]*/,
+				match: /([a-zA-Z_][a-zA-Z0-9_]*|π)/,
 			},
 		],
 	}),
