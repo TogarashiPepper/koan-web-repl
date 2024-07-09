@@ -41,7 +41,7 @@ const emphasize = createEmphasize({
 			},
 			{
 				scope: "number",
-				match: /\d+(.\d+)?/,
+				match: /\d+(\.\d+)?/,
 			},
 			{
 				scope: "keyword",
