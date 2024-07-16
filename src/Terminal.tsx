@@ -3,6 +3,9 @@ import { Terminal as XTerm } from "@xterm/xterm";
 import * as wasm from "../koan-wasm-wrapper/pkg/koan_wasm_wrapper";
 import "@xterm/xterm/css/xterm.css";
 import { createEmphasize } from "emphasize";
+import { Chalk } from "chalk";
+
+const chalk = new Chalk({ level: 3 });
 
 // Custom theme to match style of xterm.js logo
 const baseTheme = {
@@ -84,10 +87,10 @@ export function Terminal() {
 						if (buffer) {
 							const out = wasm.run_line(buffer, state);
 							buffer = "";
-                            
-                            if (out.result() !== "nothing") {
-                                term.writeln(` ${out.result()}`);
-                            }
+
+							if (out.result() !== "nothing") {
+								term.writeln(` ${out.result()}`);
+							}
 
 							if (out.stdout()) {
 								term.writeln(
@@ -117,9 +120,15 @@ export function Terminal() {
 					) {
 						buffer += e;
 						term.write("\x1b[2K\r");
-						term.write(
-							` λ ${emphasize.highlight("koan", buffer).value}`,
-						);
+
+						const v = emphasize.highlight("koan", buffer, {
+							keyword: chalk.hex("#E06C75"),
+							number: chalk.hex("#E5C07B"),
+							string: chalk.hex("#98C379"),
+						});
+
+						console.log(v);
+						term.write(` λ ${v.value}`);
 					}
 			}
 		});
