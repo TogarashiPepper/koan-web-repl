@@ -120,24 +120,6 @@ export function Terminal() {
 					}
 
 					break;
-				// Left Arrow
-				case "\x1b[D":
-					console.log(cursor);
-					if (cursor - 1 >= 0) {
-						term.write(e);
-						cursor -= 1;
-					}
-
-					break;
-				// Right Arrow
-				case "\x1b[C":
-					console.log(cursor);
-					if (cursor + 1 <= buffer.length) {
-						term.write(e);
-						cursor += 1;
-					}
-
-					break;
 				default:
 					if (
 						(e >= String.fromCharCode(0x20) &&
