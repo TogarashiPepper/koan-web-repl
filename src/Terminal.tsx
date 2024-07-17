@@ -63,6 +63,7 @@ export interface TerminalProps extends ComponentProps<"div"> {}
 export function Terminal() {
 	let ref!: HTMLDivElement;
 	let buffer = "";
+	let cursor = 0;
 
 	onMount(() => {
 		const term = new XTerm({
@@ -79,6 +80,7 @@ export function Terminal() {
 			switch (e) {
 				case "\u0003": // Ctrl+C
 					term.write("^C");
+
 					break;
 				case "\r":
 					try {
@@ -87,6 +89,7 @@ export function Terminal() {
 						if (buffer) {
 							const out = wasm.run_line(buffer, state);
 							buffer = "";
+							cursor = 0;
 
 							if (out.result() !== "nothing") {
 								term.writeln(` ${out.result()}`);
@@ -102,15 +105,38 @@ export function Terminal() {
 						term.write(" λ ");
 					} catch (err) {
 						buffer = "";
+						cursor = 0;
 						term.writeln(`Error: ${err}`);
 						term.write(" λ ");
 					}
 					break;
+
+                // Backspace
 				case "\u007F":
 					if (buffer.length >= 1) {
 						buffer = buffer.slice(0, -1);
+						cursor -= 1;
 						term.write("\b \b");
 					}
+
+					break;
+				// Left Arrow
+				case "\x1b[D":
+					console.log(cursor);
+					if (cursor - 1 >= 0) {
+						term.write(e);
+						cursor -= 1;
+					}
+
+					break;
+				// Right Arrow
+				case "\x1b[C":
+					console.log(cursor);
+					if (cursor + 1 <= buffer.length) {
+						term.write(e);
+						cursor += 1;
+					}
+
 					break;
 				default:
 					if (
@@ -119,6 +145,7 @@ export function Terminal() {
 						e >= "\u00a0"
 					) {
 						buffer += e;
+						cursor += 1;
 						term.write("\x1b[2K\r");
 
 						const v = emphasize.highlight("koan", buffer, {
@@ -127,7 +154,6 @@ export function Terminal() {
 							string: chalk.hex("#98C379"),
 						});
 
-						console.log(v);
 						term.write(` λ ${v.value}`);
 					}
 			}
