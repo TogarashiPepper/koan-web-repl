@@ -7,13 +7,16 @@ Syntax highlighting coming soon™
 
 # Screenshots
 ## Binary Expressions
-![image](https://github.com/TogarashiPepper/koan-web-repl/assets/83902606/346aac29-726a-4240-a124-84a07002a67d)
+<img width="759" alt="image" src="https://github.com/user-attachments/assets/5095af83-eb33-4aca-b053-7002298b58bb">
+
 
 ## Calculating n-th fibonacci
 ### Calculating `fib(10)`
 This is a fun way to calcluate fibonacci numbers although due to floating point inaccuracy we end up with noise
-![image](https://github.com/TogarashiPepper/koan-web-repl/assets/83902606/ca3bc3fa-c2b2-4e7c-886b-73fd5a3f09fb)
+<img width="756" alt="image" src="https://github.com/user-attachments/assets/eebed13e-0e4f-4bb7-94b3-aa874c7c22b7">
+
 
 ### Calculating `fib(25)`
 Even though there's some noise, it's still quite close to the expected answer!
-![image](https://github.com/TogarashiPepper/koan-web-repl/assets/83902606/f81e7749-dc5e-4ed8-b541-6ff5772d4c8b)
+<img width="756" alt="image" src="https://github.com/user-attachments/assets/de95ed4c-992a-44a8-864c-86a9b17827b3">
+
