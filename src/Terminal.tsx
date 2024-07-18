@@ -48,7 +48,7 @@ const emphasize = createEmphasize({
 			},
 			{
 				scope: "keyword",
-				match: /let/,
+				match: /(let|fun)/,
 			},
 			{
 				scope: "variable",
