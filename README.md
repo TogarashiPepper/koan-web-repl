@@ -5,9 +5,6 @@ to be an issue I'll spin up a cf worker.
 
 Syntax highlighting coming soon™
 
-# Issues
-Pasting causes a desync between the xterm cursor and the repl's internal cursor so it is not recommended to paste into the repl.
-
 # Screenshots
 ## Binary Expressions
 <img width="759" alt="image" src="https://github.com/user-attachments/assets/5095af83-eb33-4aca-b053-7002298b58bb">
